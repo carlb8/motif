@@ -1,5 +1,12 @@
 <?php
-
+/*
+This file is part of FreePBX motif module and derived from https://github.com/FreePBX/motif/raw/a899a286fa6af330371755325a209fcd4741bc95/functions.inc.php
+You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3 of the License. 
+Copyright 2015 Carl B.
+Copyright 2013 Schmooze Com Inc.
+Copyright 2012 Andrew Nagy
+You should have received a copy of the GNU General Public License along with motif module.  If not, see <http://www.gnu.org/licenses/>.
+*/
 global $amp_conf;
 
 function motif_get_config($engine) {
@@ -157,6 +164,8 @@ class motif_conf {
 
 				$output .= "username=".$list['username']."\n";
 				$output .= "secret=".$list['password']."\n";
+				$output .= "clientid=".$list['client_id']."\n";
+				$output .= "clientsecret=".$list['client_secret']."\n";
 
 				$output .= "port=5222\n";
 				$output .= "usetls=yes\n";
