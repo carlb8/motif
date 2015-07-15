@@ -1,6 +1,6 @@
 <?php
 /*
-This file is part of FreePBX motif module and derived from https://github.com/FreePBX/motif/raw/a899a286fa6af330371755325a209fcd4741bc95/functions.inc.php
+This file is part of FreePBX motif module 
 You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3 of the License. 
 Copyright 2015 Carl B.
 Copyright 2013 Schmooze Com Inc.
