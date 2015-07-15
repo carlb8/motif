@@ -1,4 +1,13 @@
 <?php
+/*
+This file is part of FreePBX motif module
+You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3 of the License. 
+Copyright 2015 Carl B.
+Copyright 2013 Schmooze Com Inc.
+Copyright 2012 Andrew Nagy
+You should have received a copy of the GNU General Public License along with motif module.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 global $db;
 global $amp_conf;
 global $asterisk_conf;
@@ -21,6 +30,8 @@ if($amp_conf["AMPDBENGINE"] == "mysql")  {
 	`phonenum` varchar( 12 ) NOT NULL ,
 	`username` varchar( 100 ) NOT NULL ,
 	`password` varchar( 150 ) NOT NULL ,
+	`client_id` varchar( 150 ) NOT NULL ,
+	`client_secret` varchar( 150 ) NOT NULL ,
 	`type` varchar( 50 ) NOT NULL DEFAULT 'googlevoice' ,
 	`settings` blob NOT NULL,
     `statusmessage` varchar( 50 ) NOT NULL,
