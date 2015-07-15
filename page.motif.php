@@ -1,4 +1,13 @@
 <?php
+/*
+This file is part of FreePBX motif module
+You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3 of the License. 
+Copyright 2015 Carl B.
+Copyright 2013 Schmooze Com Inc.
+Copyright 2012 Andrew Nagy
+You should have received a copy of the GNU General Public License along with motif module.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 if (!defined('FREEPBX_IS_AUTH')) { die('No direct script access allowed'); }
 isset($_REQUEST['action']) ? $action = $_REQUEST['action'] : $action = 'add';
 
@@ -33,6 +42,8 @@ if($astman && $astman->connected() && $astman->mod_loaded('motif') && $astman->m
 		$pn = isset($_REQUEST['number']) ? $db->escapeSimple($_REQUEST['number']) : '';
 		$un = isset($_REQUEST['username']) ? $db->escapeSimple($_REQUEST['username']) : '';
 		$pw = isset($_REQUEST['password']) ? $db->escapeSimple($_REQUEST['password']) : '';
+		$cid = isset($_REQUEST['client_id']) ? $db->escapeSimple($_REQUEST['client_id']) : '';
+		$css = isset($_REQUEST['client_secret']) ? $db->escapeSimple($_REQUEST['client_secret']) : '';
 		$priority = isset($_REQUEST['priority']) ? $db->escapeSimple($_REQUEST['priority']) : '127';
 		$priority = ($priority > 127) ? 127 : $priority;
 		$priority = ($priority < -128) ? -128 : $priority;
@@ -143,9 +154,9 @@ if($astman && $astman->connected() && $astman->mod_loaded('motif') && $astman->m
             $statusmessage = isset($statusmessage) && !empty($statusmessage) ? $statusmessage : 'I am Available';
 
 			if($action == 'add') {
-                $sql = "INSERT INTO `motif` (`phonenum`, `username`, `password`, `settings`, `statusmessage`, `priority`) VALUES ('" . $pn . "', '" . $un . "', '" . $pw . "', '" . $settings . "', '" . $statusmessage . "', '" . $priority . "')";
+                $sql = "INSERT INTO `motif` (`phonenum`, `username`, `password`, `client_id` , `client_secret` , `settings`, `statusmessage`, `priority`) VALUES ('" . $pn . "', '" . $un . "', '" . $pw . "', '" . $cid . "', '" . $css . "','" . $settings . "', '" . $statusmessage . "', '" . $priority . "')";
 			} elseif($action == 'edit') {
-                $sql = "UPDATE `motif` SET `phonenum` = '".$pn."', `username` = '".$un."', `password` = '".$pw."', `settings` = '".$settings."', `statusmessage` = '".$statusmessage."', `priority` = '".$priority."' WHERE id = " . $db->escapeSimple($_REQUEST['id']);
+                $sql = "UPDATE `motif` SET `phonenum` = '".$pn."', `username` = '".$un."', `password` = '".$pw."', `client_id` = '".$cid."', `client_secret` = '".$css."', `settings` = '".$settings."', `statusmessage` = '".$statusmessage."', `priority` = '".$priority."' WHERE id = " . $db->escapeSimple($_REQUEST['id']);
 			}
 			sql($sql);
 			needreload();
@@ -163,6 +174,8 @@ if($astman && $astman->connected() && $astman->mod_loaded('motif') && $astman->m
 		$account = sql($sql, 'getRow', DB_FETCHMODE_ASSOC);
 		//print_r($account);
 		$form_password = $account['password'];
+		$form_client_id = $account['client_id'];
+		$form_client_secret = $account['client_secret'];
 		$form_username = $account['username'];
 		$form_number = $account['phonenum'];
 
